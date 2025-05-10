@@ -14,6 +14,7 @@ on:
 
 jobs:
   test:
+    environment: production
     defaults:
       run:
         working-directory: src/__tests__
