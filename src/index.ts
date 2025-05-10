@@ -15,10 +15,21 @@ const fallbackMessages: Record<number, string> = {
   500: 'Something went wrong.',
 };
 
-const validateIdentifier = (id: string, label: 'region' | 'country', maxLength = 20): void => {
-  if (typeof id !== 'string' || !id.trim() || id.includes(' ') || id.length > maxLength) {
+const validateStringInput = (
+  str: string | undefined,
+  label: 'region' | 'country' | 'apiToken',
+  minLength = 3,
+  maxLength = 30
+): void => {
+  if (
+    typeof str !== 'string' ||
+    !str.trim() ||
+    str.includes(' ') ||
+    str.length < minLength ||
+    str.length > maxLength
+  ) {
     throw new TypeError(
-      `Invalid '${label}': must be a non-empty string without spaces and no longer than ${maxLength} characters.`
+      `Invalid '${label}': must be a non-empty string without spaces, between ${minLength} and ${maxLength} characters long.`
     );
   }
 };
@@ -51,7 +62,7 @@ export default class RandomCoords {
   private baseUrl: string;
 
   constructor({ apiToken, baseUrl = BASE_URL }: { apiToken: string; baseUrl?: string }) {
-    if (!apiToken) throw new Error('API key is required');
+    validateStringInput(apiToken, 'apiToken', 10, 700);
     this.apiToken = apiToken;
     this.baseUrl = baseUrl;
   }
@@ -106,7 +117,7 @@ export default class RandomCoords {
     region: string,
     options?: { limit?: number }
   ): Promise<RegionCoordinatesResponse> {
-    validateIdentifier(region, 'region');
+    validateStringInput(region, 'region');
     const limit = getValidatedLimit(options?.limit);
 
     return this._makeRequest<RegionCoordinatesResponse>(
@@ -122,7 +133,7 @@ export default class RandomCoords {
     country: string,
     options?: { limit?: number }
   ): Promise<CountryCoordinatesResponse> {
-    validateIdentifier(country, 'country');
+    validateStringInput(country, 'country');
     const limit = getValidatedLimit(options?.limit);
 
     return this._makeRequest<CountryCoordinatesResponse>(

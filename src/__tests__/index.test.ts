@@ -99,6 +99,68 @@ describe('RandomCoords Client', () => {
     });
   });
   describe('Error Handling', () => {
+    describe('API Token', () => {
+      const errMsg =
+        "Invalid 'apiToken': must be a non-empty string without spaces, between 10 and 700 characters long.";
+
+      test('missing', async () => {
+        try {
+          // @ts-ignore
+          new RandomCoords({});
+        } catch (e: any) {
+          expect(e).toBeInstanceOf(Error);
+          expect(e.message).toEqual(errMsg);
+        }
+      });
+
+      test('empty', async () => {
+        try {
+          new RandomCoords({ apiToken: '' });
+        } catch (e: any) {
+          expect(e).toBeInstanceOf(Error);
+          expect(e.message).toEqual(errMsg);
+        }
+      });
+
+      test('non-string', async () => {
+        try {
+          // @ts-ignore
+          new RandomCoords({ apiToken: 789 });
+        } catch (e: any) {
+          expect(e).toBeInstanceOf(Error);
+          expect(e.message).toEqual(errMsg);
+        }
+      });
+
+      test('with spaces', async () => {
+        try {
+          // @ts-ignore
+          new RandomCoords({ apiToken: 'abcdef ghijkl mno' });
+        } catch (e: any) {
+          expect(e).toBeInstanceOf(Error);
+          expect(e.message).toEqual(errMsg);
+        }
+      });
+
+      test('less than minimum length', async () => {
+        try {
+          new RandomCoords({ apiToken: 'abcde' });
+        } catch (e: any) {
+          expect(e).toBeInstanceOf(Error);
+          expect(e.message).toEqual(errMsg);
+        }
+      });
+
+      test('exceeds maximum length', async () => {
+        try {
+          new RandomCoords({ apiToken: 'a'.repeat(701) });
+        } catch (e: any) {
+          expect(e).toBeInstanceOf(Error);
+          expect(e.message).toEqual(errMsg);
+        }
+      });
+    });
+
     describe('API Failures', () => {
       afterEach(() => {
         jest.restoreAllMocks();
@@ -191,9 +253,10 @@ describe('RandomCoords Client', () => {
 
     describe('Identifier Validation', () => {
       const errMsgRegion =
-        "Invalid 'region': must be a non-empty string without spaces and no longer than 20 characters.";
+        "Invalid 'region': must be a non-empty string without spaces, between 3 and 30 characters long.";
       const errMsgCountry =
-        "Invalid 'country': must be a non-empty string without spaces and no longer than 20 characters.";
+        "Invalid 'country': must be a non-empty string without spaces, between 3 and 30 characters long.";
+
       test('empty', async () => {
         const client = new RandomCoords({ apiToken });
 
@@ -254,14 +317,32 @@ describe('RandomCoords Client', () => {
         const client = new RandomCoords({ apiToken });
 
         try {
-          await client.getRegionCoordinates('some-very-long-string');
+          await client.getRegionCoordinates('some-very-long-string-123456789-xyz');
         } catch (e: any) {
           expect(e).toBeInstanceOf(TypeError);
           expect(e.message).toEqual(errMsgRegion);
         }
 
         try {
-          await client.getCountryCoordinates('some-very-long-string');
+          await client.getCountryCoordinates('some-very-long-string-123456789-xyz');
+        } catch (e: any) {
+          expect(e).toBeInstanceOf(TypeError);
+          expect(e.message).toEqual(errMsgCountry);
+        }
+      });
+
+      test('less than min length', async () => {
+        const client = new RandomCoords({ apiToken });
+
+        try {
+          await client.getRegionCoordinates('a');
+        } catch (e: any) {
+          expect(e).toBeInstanceOf(TypeError);
+          expect(e.message).toEqual(errMsgRegion);
+        }
+
+        try {
+          await client.getCountryCoordinates('a');
         } catch (e: any) {
           expect(e).toBeInstanceOf(TypeError);
           expect(e.message).toEqual(errMsgCountry);
@@ -276,14 +357,14 @@ describe('RandomCoords Client', () => {
         const client = new RandomCoords({ apiToken });
 
         try {
-          await client.getRegionCoordinates('a', { limit: 0 });
+          await client.getRegionCoordinates('abc', { limit: 0 });
         } catch (e: any) {
           expect(e).toBeInstanceOf(TypeError);
           expect(e.message).toEqual(errMsg);
         }
 
         try {
-          await client.getCountryCoordinates('a', { limit: 0 });
+          await client.getCountryCoordinates('abc', { limit: 0 });
         } catch (e: any) {
           expect(e).toBeInstanceOf(TypeError);
           expect(e.message).toEqual(errMsg);
@@ -294,14 +375,14 @@ describe('RandomCoords Client', () => {
         const client = new RandomCoords({ apiToken });
 
         try {
-          await client.getRegionCoordinates('a', { limit: 1000 });
+          await client.getRegionCoordinates('abc', { limit: 1000 });
         } catch (e: any) {
           expect(e).toBeInstanceOf(TypeError);
           expect(e.message).toEqual(errMsg);
         }
 
         try {
-          await client.getCountryCoordinates('a', { limit: 1000 });
+          await client.getCountryCoordinates('abc', { limit: 1000 });
         } catch (e: any) {
           expect(e).toBeInstanceOf(TypeError);
           expect(e.message).toEqual(errMsg);
@@ -313,7 +394,7 @@ describe('RandomCoords Client', () => {
 
         try {
           // @ts-ignore
-          await client.getRegionCoordinates('a', { limit: '1' });
+          await client.getRegionCoordinates('abc', { limit: '1' });
         } catch (e: any) {
           expect(e).toBeInstanceOf(TypeError);
           expect(e.message).toEqual(errMsg);
@@ -321,7 +402,7 @@ describe('RandomCoords Client', () => {
 
         try {
           // @ts-ignore
-          await client.getCountryCoordinates('a', { limit: '1' });
+          await client.getCountryCoordinates('abc', { limit: '1' });
         } catch (e: any) {
           expect(e).toBeInstanceOf(TypeError);
           expect(e.message).toEqual(errMsg);
@@ -332,14 +413,14 @@ describe('RandomCoords Client', () => {
         const client = new RandomCoords({ apiToken });
 
         try {
-          await client.getRegionCoordinates('a', { limit: 3.14 });
+          await client.getRegionCoordinates('abc', { limit: 3.14 });
         } catch (e: any) {
           expect(e).toBeInstanceOf(TypeError);
           expect(e.message).toEqual(errMsg);
         }
 
         try {
-          await client.getCountryCoordinates('a', { limit: 3.14 });
+          await client.getCountryCoordinates('abc', { limit: 3.14 });
         } catch (e: any) {
           expect(e).toBeInstanceOf(TypeError);
           expect(e.message).toEqual(errMsg);
