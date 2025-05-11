@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/randomcoords)](https://www.npmjs.com/package/randomcoords)
 ![CI](https://github.com/TalhaAwan/randomcoords-node/actions/workflows/ci.yml/badge.svg)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Node.js](https://img.shields.io/badge/node-%3E%3D16-blue)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D14-blue)](https://nodejs.org/)
 ![downloads](https://img.shields.io/npm/dm/randomcoords)
 
 The Node.js client for the RandomCoords API to fetch random geographic coordinates worldwide.
@@ -22,8 +22,20 @@ yarn add randomcoords
 
 ## Requirements
 
-- Node.js v16 or higher
+- Node.js v14 or higher
 - An `apiToken` from [RandomCoords](https://www.randomcoords.com/docs/rest)
+
+## Import
+
+```typescript
+import RandomCoords from 'randomcoords';
+```
+
+Or CommonJS
+
+```typescript
+const RandomCoords = require('randomcoords');
+```
 
 ## Usage
 
