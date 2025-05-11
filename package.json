@@ -1,7 +1,7 @@
 {
   "name": "randomcoords",
   "version": "1.0.0",
-  "description": "The Node.js client library for accessing the RandomCoords API.",
+  "description": "The Node.js client for the RandomCoords API to fetch random geographic coordinates worldwide.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -28,13 +28,14 @@
     "coordinates",
     "latitude",
     "longitude",
+    "world",
     "regions",
     "countries"
   ],
   "author": "Talha Awan",
   "license": "MIT",
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
