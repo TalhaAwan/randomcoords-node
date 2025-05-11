@@ -41,12 +41,12 @@ console.log(coords);
 
 ## Available Methods
 
-| Method                  | Parameters                                    | Response                                       |
-| ----------------------- | --------------------------------------------- | ---------------------------------------------- |
-| getRegions()            | –                                             | Metadata and a list of supported regions       |
-| getCountries()          | –                                             | Metadata and a list of supported countries     |
-| getRegionCoordinates()  | region: string, options?: { limit?: number }  | Metadata and random coordinates in the region  |
-| getCountryCoordinates() | country: string, options?: { limit?: number } | Metadata and random coordinates in the country |
+| Method                  | Parameters                                    | Response                                        |
+| ----------------------- | --------------------------------------------- | ----------------------------------------------- |
+| getRegions()            | –                                             | Metadata and a list of supported regions.       |
+| getCountries()          | –                                             | Metadata and a list of supported countries.     |
+| getRegionCoordinates()  | region: string, options?: { limit?: number }  | Metadata and random coordinates in the region.  |
+| getCountryCoordinates() | country: string, options?: { limit?: number } | Metadata and random coordinates in the country. |
 
 ## API Error Handling
 
