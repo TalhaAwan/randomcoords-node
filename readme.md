@@ -22,8 +22,8 @@ yarn add randomcoords
 
 ## Requirements
 
-- Node.js v14 or higher
-- An `apiToken` from [RandomCoords](https://www.randomcoords.com/docs/rest)
+- Node.js v14 or higher.
+- An `apiToken` from [RandomCoords](https://www.randomcoords.com/docs/rest).
 
 ## Import
 
