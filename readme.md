@@ -6,7 +6,7 @@
 [![Node.js](https://img.shields.io/badge/node-%3E%3D16-blue)](https://nodejs.org/)
 ![downloads](https://img.shields.io/npm/dm/randomcoords)
 
-The Node.js client for the RandomCoords REST API to get random geographic coordinates from around the world.
+The Node.js client for the RandomCoords API to fetch random geographic coordinates worldwide.
 
 ## Installation
 
@@ -32,38 +32,80 @@ import RandomCoords from 'randomcoords';
 
 const client = new RandomCoords({ apiToken: 'your-api-token' });
 
-const countries = await client.getCountries();
-console.log(countries);
-
 const coords = await client.getCountryCoordinates('united-states', { limit: 10 });
 console.log(coords);
 ```
 
 ## Available Methods
 
-| Method                  | Parameters                                    | Response                                        |
-| ----------------------- | --------------------------------------------- | ----------------------------------------------- |
-| getRegions()            | –                                             | Metadata and a list of supported regions.       |
-| getCountries()          | –                                             | Metadata and a list of supported countries.     |
-| getRegionCoordinates()  | region: string, options?: { limit?: number }  | Metadata and random coordinates in the region.  |
-| getCountryCoordinates() | country: string, options?: { limit?: number } | Metadata and random coordinates in the country. |
+### `getRegions()`
 
-## API Error Handling
+#### Parameters
 
-All API errors throw a `RandomCoordsApiError`, which extends the native `Error` class and includes:
+None
 
-- `statusCode`: HTTP status
-- `url`: the request URL
-- `message`: descriptive error message
+#### Returns
 
-```typescript
+Metadata and a list of supported regions.
+
+### `getCountries()`
+
+#### Parameters
+
+None
+
+#### Returns
+
+Metadata and a list of supported countries.
+
+### `getRegionCoordinates(region, options)`
+
+#### Parameters
+
+- `region` (`string`) – The region identifier (e.g., `"world"`, `"europe"`).
+- `options` (`object`, optional):
+  - `limit` (`number`, optional) – Maximum number of coordinates to return (default: `1`, maximum: `100`).
+
+#### Returns
+
+Metadata and random coordinates within the specified region.
+
+### `getCountryCoordinates(country, options)`
+
+#### Parameters
+
+- `country` (`string`) – The country identifier (e.g., `"united-states"`, `"australia"`).
+- `options` (`object`, optional):
+  - `limit` (`number`, optional) – Maximum number of coordinates to return (default: `1`, maximum: `100`).
+
+#### Returns
+
+Metadata and random coordinates within the specified country.
+
+## Error Handling
+
+The library throws:
+
+- `TypeError` or `Error` – for validation or unexpected usage issues (e.g., invalid inputs).
+- `RandomCoordsApiError` – for HTTP/API-related failures. This custom error includes:
+  - `statusCode`: HTTP status code (e.g., `401`, `404`, `429`).
+  - `url`: The API request URL.
+  - `message`: A descriptive error message.
+
+**Example:**
+
+```ts
 import { RandomCoordsApiError } from 'randomcoords';
 
 try {
-  await client.getRegionCoordinates('unknown-region');
+  // a method call
 } catch (err) {
-  if (err instanceof RandomCoordsApiError) {
-    console.error(`Failed with status ${err.statusCode} at ${err.url}: ${err.message}`);
+  if (err instanceof TypeError) {
+    console.error(`Invalid input: ${err.message}`);
+  } else if (err instanceof RandomCoordsApiError) {
+    console.error(`API error ${err.statusCode} at ${err.url}: ${err.message}`);
+  } else {
+    console.error('Unexpected error:', err);
   }
 }
 ```
@@ -71,6 +113,10 @@ try {
 ## API Reference
 
 - [REST API docs](https://www.randomcoords.com/docs/rest)
+
+## Issues
+
+If you encounter a bug, please [open an issue](https://github.com/TalhaAwan/randomcoords-node/issues).
 
 ## License
 
