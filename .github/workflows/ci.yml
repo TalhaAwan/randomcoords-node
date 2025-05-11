@@ -19,7 +19,7 @@ jobs:
       run:
         working-directory: src/__tests__
     env:
-      NODE_VERSION: 16
+      NODE_VERSION: 20
       API_TOKEN: ${{ secrets.API_TOKEN }}
 
     runs-on: ubuntu-latest
