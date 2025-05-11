@@ -35,7 +35,7 @@
   "author": "Talha Awan",
   "license": "MIT",
   "engines": {
-    "node": ">=16"
+    "node": ">=14"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
