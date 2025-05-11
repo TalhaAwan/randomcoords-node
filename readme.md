@@ -34,7 +34,7 @@ import RandomCoords from 'randomcoords';
 Or CommonJS
 
 ```typescript
-const RandomCoords = require('randomcoords');
+const { default: RandomCoords } = require('randomcoords');
 ```
 
 ## Usage
