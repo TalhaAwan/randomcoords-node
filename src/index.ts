@@ -45,13 +45,13 @@ const getValidatedLimit = (limit: number | undefined, min = 1, max = 100): numbe
   return value;
 };
 
-export class RandomCoordsError extends Error {
+export class RandomCoordsApiError extends Error {
   public readonly statusCode: number;
   public readonly url: string;
 
   constructor(message: string, statusCode: number, url: string) {
     super(message);
-    this.name = 'RandomCoordsError';
+    this.name = 'RandomCoordsApiError';
     this.statusCode = statusCode;
     this.url = url;
   }
@@ -100,7 +100,7 @@ export default class RandomCoords {
           const message =
             parsedMessage || fallbackMessages[statusCode] || 'Unexpected error occurred.';
 
-          return reject(new RandomCoordsError(message, statusCode, url.toString()));
+          return reject(new RandomCoordsApiError(message, statusCode, url.toString()));
         });
       });
 

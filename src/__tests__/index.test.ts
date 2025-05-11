@@ -1,4 +1,4 @@
-import RandomCoords, { RandomCoordsError } from '../index';
+import RandomCoords, { RandomCoordsApiError } from '../index';
 import { PassThrough } from 'stream';
 import https from 'https';
 import http from 'http';
@@ -170,7 +170,7 @@ describe('RandomCoords Client', () => {
         try {
           await client.getRegions();
         } catch (e: any) {
-          expect(e).toBeInstanceOf(RandomCoordsError);
+          expect(e).toBeInstanceOf(RandomCoordsApiError);
           expect(e.statusCode).toBe(401);
           expect(e.message.toLowerCase()).toContain('invalid');
         }
@@ -182,7 +182,7 @@ describe('RandomCoords Client', () => {
         try {
           await client.getRegionCoordinates('nonexistent-region');
         } catch (e: any) {
-          expect(e).toBeInstanceOf(RandomCoordsError);
+          expect(e).toBeInstanceOf(RandomCoordsApiError);
           expect(e.statusCode).toBe(404);
           expect(e.message).toContain('nonexistent-region');
         }
@@ -201,7 +201,7 @@ describe('RandomCoords Client', () => {
           await client.getRegions();
           throw new Error('Expected to throw but did not');
         } catch (e: any) {
-          expect(e).toBeInstanceOf(RandomCoordsError);
+          expect(e).toBeInstanceOf(RandomCoordsApiError);
           expect(e.statusCode).toBe(429);
           expect(e.message.toLowerCase()).toContain('too many');
           expect(e.message).toEqual('Too many requests. Wait and try again.');
@@ -223,7 +223,7 @@ describe('RandomCoords Client', () => {
           await client.getRegions();
           throw new Error('Expected to throw but did not');
         } catch (e: any) {
-          expect(e).toBeInstanceOf(RandomCoordsError);
+          expect(e).toBeInstanceOf(RandomCoordsApiError);
           expect(e.statusCode).toBe(500);
           expect(e.message).toEqual('Something went wrong.');
         }
