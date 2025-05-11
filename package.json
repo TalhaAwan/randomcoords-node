@@ -1,7 +1,7 @@
 {
   "name": "randomcoords",
   "version": "1.0.0",
-  "description": "Node.js client for the RandomCoords API.",
+  "description": "The Node.js client library for accessing the RandomCoords API.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -27,7 +27,9 @@
     "location",
     "coordinates",
     "latitude",
-    "longitude"
+    "longitude",
+    "regions",
+    "countries"
   ],
   "author": "Talha Awan",
   "license": "MIT",
