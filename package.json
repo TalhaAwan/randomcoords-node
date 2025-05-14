@@ -1,6 +1,6 @@
 {
   "name": "randomcoords",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The Node.js client for the RandomCoords API to fetch random geographic coordinates worldwide.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
