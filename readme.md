@@ -1,12 +1,12 @@
 # RandomCoords Node.js Client
 
 [![npm version](https://img.shields.io/npm/v/randomcoords)](https://www.npmjs.com/package/randomcoords)
-![CI](https://github.com/TalhaAwan/randomcoords-node/actions/workflows/ci.yml/badge.svg)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Node.js](https://img.shields.io/badge/node-%3E%3D14-blue)](https://nodejs.org/)
-![downloads](https://img.shields.io/npm/dm/randomcoords)
+[![CI](https://github.com/TalhaAwan/randomcoords-node/actions/workflows/ci.yml/badge.svg)](https://github.com/TalhaAwan/randomcoords-node/actions/workflows/ci.yml)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D14-blue)](https://www.npmjs.com/package/randomcoords)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/TalhaAwan/randomcoords-node/blob/main/LICENSE)
+[![Downloads](https://img.shields.io/npm/dm/randomcoords)](https://www.npmjs.com/package/randomcoords)
 
-The Node.js client for the RandomCoords API to fetch random geographic coordinates worldwide.
+The Node.js client for the [RandomCoords](https://www.randomcoords.com) API to fetch random geographic coordinates worldwide.
 
 ## Installation
 
@@ -14,7 +14,7 @@ The Node.js client for the RandomCoords API to fetch random geographic coordinat
 npm install randomcoords
 ```
 
-or
+Or
 
 ```bash
 yarn add randomcoords
@@ -23,7 +23,7 @@ yarn add randomcoords
 ## Requirements
 
 - Node.js v14 or higher.
-- An `apiToken` from [RandomCoords](https://www.randomcoords.com/docs/rest).
+- A [RandomCoords API token](https://www.randomcoords.com/docs/rest).
 
 ## Import
 
