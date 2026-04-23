@@ -40,7 +40,7 @@ export interface RegionCoordinatesResponse {
 
 export interface CountryCoordinate {
   city: string;
-  state: string;
+  state?: string;
   coordinates: [number, number];
 }
 

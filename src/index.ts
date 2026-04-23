@@ -9,6 +9,8 @@ import {
 } from './types';
 
 const BASE_URL = 'https://api.randomcoords.com/v1/';
+const SDK_VERSION = '1.0.2';
+const USER_AGENT = `randomcoords-node/${SDK_VERSION}`;
 
 const fallbackMessages: Record<number, string> = {
   429: 'Too many requests. Wait and try again.',
@@ -74,6 +76,7 @@ export default class RandomCoords {
       method: 'GET',
       headers: {
         'x-api-token': this.apiToken,
+        'User-Agent': USER_AGENT,
       },
     };
 
