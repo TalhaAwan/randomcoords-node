@@ -48,6 +48,14 @@ const coords = await client.getCountryCoordinates('united-states', { limit: 10 }
 console.log(coords);
 ```
 
+### Constructor options
+
+| Key         | Type     | Default                            | Description                      |
+| ----------- | -------- | ---------------------------------- | -------------------------------- |
+| `apiToken`  | `string` | —                                  | Required. Your API token.        |
+| `baseUrl`   | `string` | `https://api.randomcoords.com/v1/` | API base URL.                    |
+| `timeoutMs` | `number` | `5000`                             | Request timeout in milliseconds. |
+
 ## Available Methods
 
 ### `getRegions()`

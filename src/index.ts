@@ -9,8 +9,9 @@ import {
 } from './types';
 
 const BASE_URL = 'https://api.randomcoords.com/v1/';
-const SDK_VERSION = '1.0.2';
+const SDK_VERSION = '1.0.3';
 const USER_AGENT = `randomcoords-node/${SDK_VERSION}`;
+const DEFAULT_TIMEOUT_MS = 5000;
 
 const fallbackMessages: Record<number, string> = {
   429: 'Too many requests. Wait and try again.',
@@ -62,11 +63,21 @@ export class RandomCoordsApiError extends Error {
 export default class RandomCoords {
   private apiToken: string;
   private baseUrl: string;
+  private timeoutMs: number;
 
-  constructor({ apiToken, baseUrl = BASE_URL }: { apiToken: string; baseUrl?: string }) {
+  constructor({
+    apiToken,
+    baseUrl = BASE_URL,
+    timeoutMs = DEFAULT_TIMEOUT_MS,
+  }: {
+    apiToken: string;
+    baseUrl?: string;
+    timeoutMs?: number;
+  }) {
     validateStringInput(apiToken, 'apiToken', 10, 700);
     this.apiToken = apiToken;
     this.baseUrl = baseUrl;
+    this.timeoutMs = timeoutMs;
   }
 
   private _makeRequest<T>(path: string): Promise<T> {
@@ -105,6 +116,10 @@ export default class RandomCoords {
 
           return reject(new RandomCoordsApiError(message, statusCode, url.toString()));
         });
+      });
+
+      req.setTimeout(this.timeoutMs, () => {
+        req.destroy(new Error(`Request timed out after ${this.timeoutMs}ms`));
       });
 
       req.on('error', reject);

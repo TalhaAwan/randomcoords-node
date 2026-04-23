@@ -34,6 +34,8 @@ function mockHttpsResponse({
       const fakeRequest: Partial<http.ClientRequest> = {
         on: jest.fn(),
         end: jest.fn(),
+        setTimeout: jest.fn(),
+        destroy: jest.fn(),
       };
 
       return fakeRequest as http.ClientRequest;
