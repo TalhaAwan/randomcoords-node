@@ -9,7 +9,7 @@ import {
 } from './types';
 
 const BASE_URL = 'https://api.randomcoords.com/v1/';
-const SDK_VERSION = '1.0.3';
+const SDK_VERSION = '1.0.4';
 const USER_AGENT = `randomcoords-node/${SDK_VERSION}`;
 const DEFAULT_TIMEOUT_MS = 5000;
 

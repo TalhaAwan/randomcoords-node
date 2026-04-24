@@ -22,10 +22,11 @@ export interface CountriesResponse {
 }
 
 export interface Coordinate {
+  uid: string;
+  id: string;
   country: string;
   state?: string;
   city: string;
-  id: string;
   iso2: string;
   coordinates: [number, number];
 }
@@ -39,6 +40,7 @@ export interface RegionCoordinatesResponse {
 }
 
 export interface CountryCoordinate {
+  uid: string;
   city: string;
   state?: string;
   coordinates: [number, number];
